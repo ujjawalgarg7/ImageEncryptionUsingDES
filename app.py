@@ -6,17 +6,17 @@ import os
 
 app = Flask(__name__)
 
-# Function to generate a 3DES key
+
 def generate_key():
     while True:
-        key = get_random_bytes(24)  # 3DES requires a 24-byte key
+        key = get_random_bytes(24)  
         try:
             DES3.new(key, DES3.MODE_ECB)
             return key
         except ValueError:
             continue
 
-# Encrypt image
+
 def encrypt_image(file_path, output_path, key):
     with open(file_path, 'rb') as f:
         plaintext = f.read()
@@ -27,7 +27,7 @@ def encrypt_image(file_path, output_path, key):
         f.write(ciphertext)
     return output_path
 
-# Decrypt image
+
 def decrypt_image(file_path, output_path, key):
     with open(file_path, 'rb') as f:
         iv = f.read(8)
